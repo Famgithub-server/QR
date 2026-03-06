@@ -4,21 +4,34 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>AR Floating Slip</title>
+    
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+    
+    <style>
+      /* ทำให้รูปสลิปลอยอยู่ตรงกลางหน้าจอเสมอ */
+      .floating-slip {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 80%;         /* ขนาดรูป 80% ของหน้าจอมือถือ */
+        max-width: 350px;   /* กันไม่ให้รูปใหญ่เกินไปในจอคอม */
+        z-index: 9999;      /* อยู่หน้าสุดทับกล้อง */
+        pointer-events: none; /* เพื่อให้เรายังกดปุ่มหลังรูปได้ (ถ้ามี) */
+      }
+    </style>
   </head>
   <body style="margin: 0; overflow: hidden;">
     
-    <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;">
-      
-      <a-assets>
-        <img id="slipImage" src="https://raw.githubusercontent.com/Famgithub-server/QR/refs/heads/main/12345.png" crossorigin="anonymous">
-      </a-assets>
-      
-      <a-camera position="0 0 0" look-controls="enabled: false">
-          <a-image src="#slipImage" position="0 0 -2" width="1.5" height="1.5"></a-image>
-      </a-camera>
+    <img src="https://raw.githubusercontent.com/Famgithub-server/QR/refs/heads/main/12345.png" 
+         class="floating-slip" 
+         alt="Slip"
+         onerror="alert('ยังดึงรูปไม่ได้ครับเจ้านาย! อาจเป็นเพราะระบบ Raw GitHub บล็อกชั่วคราว ลองเปิดโหมดไม่ระบุตัวตนดูนะครับ');">
 
+    <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;" vr-mode-ui="enabled: false">
+      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
     </a-scene>
+
   </body>
 </html>
