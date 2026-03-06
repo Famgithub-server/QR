@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>AR Debug</title>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+    <style>
+        /* ตัวหนังสือบอกสถานะ (Debug) */
+        #debug-text {
+            position: fixed; top: 10px; left: 10px; color: yellow;
+            background: rgba(0,0,0,0.7); z-index: 10000; padding: 5px; font-size: 12px;
+        }
+        /* รูปสลิป */
+        .slip {
+            position: fixed; top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 250px; z-index: 9999;
+            border: 4px solid white; box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+    </style>
+</head>
+<body style="margin: 0; overflow: hidden;">
+    <div id="debug-text">กำลังโหลดรูป...</div>
+
+    <img id="myImage" src="12345.png" class="slip" 
+         onload="document.getElementById('debug-text').innerHTML='สถานะ: รูปโหลดสำเร็จ!';" 
+         onerror="document.getElementById('debug-text').innerHTML='สถานะ: หาไฟล์ 12345.png ไม่เจอ (404)';" />
+
+    <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;" vr-mode-ui="enabled: false">
+        <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+    </a-scene>
+</body>
+</html>
